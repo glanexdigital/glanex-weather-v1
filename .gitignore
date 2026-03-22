@@ -1,45 +1,75 @@
-# Miscellaneous
-*.class
+# -------------------------------
+# 🔧 SYSTEM FILES
+# -------------------------------
 *.log
+*.tmp
 *.pyc
 *.swp
 .DS_Store
-.atom/
-.build/
-.buildlog/
-.history
-.svn/
-.swiftpm/
-migrate_working_dir/
+Thumbs.db
 
-# IntelliJ related
+# -------------------------------
+# 💻 IDE FILES
+# -------------------------------
+.idea/
+.vscode/
 *.iml
 *.ipr
 *.iws
-.idea/
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
-
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
+# -------------------------------
+# 🧱 FLUTTER / DART
+# -------------------------------
 .dart_tool/
-.flutter-plugins-dependencies
-.pub-cache/
+.packages
 .pub/
-/build/
-/coverage/
+.pub-cache/
+build/
+coverage/
 
-# Symbolication related
-app.*.symbols
+# -------------------------------
+# 📱 FLUTTER GENERATED
+# -------------------------------
+.flutter-plugins
+.flutter-plugins-dependencies
 
-# Obfuscation related
-app.*.map.json
+# -------------------------------
+# 🔐 ENV / SECRET FILES (KRİTİK)
+# -------------------------------
+.env
+.env.*
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+# -------------------------------
+# 🔥 FIREBASE (DİKKAT!)
+# -------------------------------
+# Eğer public repo ise bunu ignore et
+# private repo ise bırakabilirsin
+
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+
+# -------------------------------
+# 🤖 ANDROID BUILD
+# -------------------------------
+android/.gradle/
+android/app/build/
+android/build/
+
+# -------------------------------
+# 🍏 iOS BUILD
+# -------------------------------
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/.last_build_id
+ios/Flutter/Generated.xcconfig
+
+# -------------------------------
+# 🔑 KEYSTORE (ÇOK KRİTİK)
+# -------------------------------
+*.jks
+*.keystore
+
+# -------------------------------
+# 🗺 MAPBOX / API KEYS (EXTRA)
+# -------------------------------
+*.env.json

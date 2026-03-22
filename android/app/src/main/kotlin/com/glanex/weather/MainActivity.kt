@@ -1,4 +1,4 @@
-package com.example.glanex_weather
+package com.glanex.weather
 
 import io.flutter.embedding.android.FlutterActivity
 
