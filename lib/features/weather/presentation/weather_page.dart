@@ -63,41 +63,92 @@ class _WeatherPageState extends State<WeatherPage> {
                 : Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // 🔥 ŞEHİR GÖSTERİMİ
-                      if (provider.currentCity != null)
-                        Text(
-                          provider.currentCity!,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                      Container(
+  width: double.infinity,
+  padding: const EdgeInsets.all(24),
+  margin: const EdgeInsets.all(16),
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(20),
+    gradient: const LinearGradient(
+      colors: [
+        Color(0xFF4facfe),
+        Color(0xFF00f2fe),
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+  ),
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      if (provider.currentCity != null)
+        Text(
+          provider.currentCity!,
+          style: const TextStyle(
+            fontSize: 18,
+            color: Colors.white,
+          ),
+        ),
 
-                      const SizedBox(height: 10),
+      const SizedBox(height: 10),
 
-                      Text(
-                        "${provider.weather!.temp}°C",
-                        style: const TextStyle(fontSize: 42),
-                      ),
+      Text(
+        "${provider.weather!.temp}°C",
+        style: const TextStyle(
+          fontSize: 64,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      ),
 
-                      const SizedBox(height: 8),
+      const SizedBox(height: 8),
 
-                      Text(provider.weather!.condition),
+      Text(
+        provider.weather!.condition,
+        style: const TextStyle(
+          fontSize: 18,
+          color: Colors.white70,
+        ),
+      ),
 
-                      const SizedBox(height: 8),
+      const SizedBox(height: 20),
 
-                      Text("Rüzgar: ${provider.weather!.wind} km/h"),
-                      Text("Nem: ${provider.weather!.humidity}%"),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Column(
+            children: [
+              const Icon(Icons.air, color: Colors.white),
+              Text(
+                "${provider.weather!.wind} km/h",
+                style: const TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              const Icon(Icons.water_drop, color: Colors.white),
+              Text(
+                "${provider.weather!.humidity}%",
+                style: const TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
+        ],
+      ),
 
-                      const SizedBox(height: 12),
+      const SizedBox(height: 20),
 
-                      if (provider.lastUpdated != null)
-                        Text(
-                          "Son güncelleme: "
-                          "${provider.lastUpdated!.hour.toString().padLeft(2, '0')}:"
-                          "${provider.lastUpdated!.minute.toString().padLeft(2, '0')}",
-                          style: const TextStyle(fontSize: 12),
-                        ),
+      if (provider.lastUpdated != null)
+        Text(
+          "Son güncelleme: "
+          "${provider.lastUpdated!.hour.toString().padLeft(2, '0')}:"
+          "${provider.lastUpdated!.minute.toString().padLeft(2, '0')}",
+          style: const TextStyle(color: Colors.white70),
+        ),
+    ],
+  ),
+)
                     ],
                   ),
       ),
