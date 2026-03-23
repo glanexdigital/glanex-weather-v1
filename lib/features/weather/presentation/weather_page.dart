@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'weather_provider.dart';
+import 'search_page.dart';
 
 class WeatherPage extends StatefulWidget {
   const WeatherPage({super.key});
@@ -29,13 +30,22 @@ class _WeatherPageState extends State<WeatherPage> {
       appBar: AppBar(
         title: const Text("Glanex Weather"),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () {
-              context.read<WeatherProvider>().getWeatherByLocation();
-            },
-          )
-        ],
+  IconButton(
+    icon: const Icon(Icons.search),
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const SearchPage()),
+      );
+    },
+  ),
+  IconButton(
+    icon: const Icon(Icons.refresh),
+    onPressed: () {
+      context.read<WeatherProvider>().getWeatherByLocation();
+    },
+  ),
+],
       ),
 
       // 🔥 BODY EKLEDİK

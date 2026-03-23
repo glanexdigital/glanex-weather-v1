@@ -10,8 +10,9 @@ class WeatherProvider extends ChangeNotifier {
 
   WeatherModel? weather;
   bool isLoading = false;
-  DateTime? lastUpdated; // 🔥 EKLEDİK
+  DateTime? lastUpdated;
 
+  // 📍 KONUMDAN HAVA
   Future<void> getWeatherByLocation() async {
     isLoading = true;
     notifyListeners();
@@ -24,7 +25,23 @@ class WeatherProvider extends ChangeNotifier {
         position.longitude,
       );
 
-      lastUpdated = DateTime.now(); // 🔥 EKLEDİK
+      lastUpdated = DateTime.now();
+    } catch (e) {
+      log(e.toString());
+    }
+
+    isLoading = false;
+    notifyListeners();
+  }
+
+  // 🔍 ŞEHİRDEN HAVA (HATA BURADAYDI 🔥)
+  Future<void> getWeatherByCity(String city) async {
+    isLoading = true;
+    notifyListeners();
+
+    try {
+      weather = await service.fetchWeather(city);
+      lastUpdated = DateTime.now();
     } catch (e) {
       log(e.toString());
     }
