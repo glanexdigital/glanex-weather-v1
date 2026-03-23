@@ -30,25 +30,24 @@ class _WeatherPageState extends State<WeatherPage> {
       appBar: AppBar(
         title: const Text("Glanex Weather"),
         actions: [
-  IconButton(
-    icon: const Icon(Icons.search),
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => const SearchPage()),
-      );
-    },
-  ),
-  IconButton(
-    icon: const Icon(Icons.refresh),
-    onPressed: () {
-      context.read<WeatherProvider>().getWeatherByLocation();
-    },
-  ),
-],
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const SearchPage()),
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: () {
+              context.read<WeatherProvider>().getWeatherByLocation();
+            },
+          ),
+        ],
       ),
 
-      // 🔥 BODY EKLEDİK
       body: Center(
         child: provider.isLoading
             ? Column(
@@ -64,19 +63,34 @@ class _WeatherPageState extends State<WeatherPage> {
                 : Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      // 🔥 ŞEHİR GÖSTERİMİ
+                      if (provider.currentCity != null)
+                        Text(
+                          provider.currentCity!,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+
+                      const SizedBox(height: 10),
+
                       Text(
                         "${provider.weather!.temp}°C",
                         style: const TextStyle(fontSize: 42),
                       ),
+
                       const SizedBox(height: 8),
+
                       Text(provider.weather!.condition),
+
                       const SizedBox(height: 8),
+
                       Text("Rüzgar: ${provider.weather!.wind} km/h"),
                       Text("Nem: ${provider.weather!.humidity}%"),
 
                       const SizedBox(height: 12),
 
-                      // 🔥 SON GÜNCELLEME
                       if (provider.lastUpdated != null)
                         Text(
                           "Son güncelleme: "
