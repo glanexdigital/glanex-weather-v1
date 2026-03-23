@@ -17,7 +17,7 @@ void initState() {
   WidgetsBinding.instance.addPostFrameCallback((_) {
     if (!mounted) return;
 
-    context.read<WeatherProvider>().getWeather("Istanbul");
+    context.read<WeatherProvider>().getWeatherByLocation();
   });
 }
 
