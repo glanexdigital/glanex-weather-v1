@@ -44,7 +44,7 @@ flutter {
 }
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:34.1.1"))
+    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
 
     implementation("com.google.firebase:firebase-analytics")
 
