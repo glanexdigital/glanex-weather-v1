@@ -11,25 +11,44 @@ class WeatherPage extends StatefulWidget {
 
 class _WeatherPageState extends State<WeatherPage> {
   @override
-void initState() {
-  super.initState();
+  void initState() {
+    super.initState();
 
-  WidgetsBinding.instance.addPostFrameCallback((_) {
-    if (!mounted) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
 
-    context.read<WeatherProvider>().getWeatherByLocation();
-  });
-}
+      context.read<WeatherProvider>().getWeatherByLocation();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<WeatherProvider>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Glanex Weather")),
+      appBar: AppBar(
+        title: const Text("Glanex Weather"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: () {
+              context.read<WeatherProvider>().getWeatherByLocation();
+            },
+          )
+        ],
+      ),
+
+      // 🔥 BODY EKLEDİK
       body: Center(
         child: provider.isLoading
-            ? const CircularProgressIndicator()
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  CircularProgressIndicator(),
+                  SizedBox(height: 10),
+                  Text("Güncelleniyor..."),
+                ],
+              )
             : provider.weather == null
                 ? const Text("Veri yok")
                 : Column(
@@ -37,11 +56,24 @@ void initState() {
                     children: [
                       Text(
                         "${provider.weather!.temp}°C",
-                        style: const TextStyle(fontSize: 40),
+                        style: const TextStyle(fontSize: 42),
                       ),
+                      const SizedBox(height: 8),
                       Text(provider.weather!.condition),
+                      const SizedBox(height: 8),
                       Text("Rüzgar: ${provider.weather!.wind} km/h"),
                       Text("Nem: ${provider.weather!.humidity}%"),
+
+                      const SizedBox(height: 12),
+
+                      // 🔥 SON GÜNCELLEME
+                      if (provider.lastUpdated != null)
+                        Text(
+                          "Son güncelleme: "
+                          "${provider.lastUpdated!.hour.toString().padLeft(2, '0')}:"
+                          "${provider.lastUpdated!.minute.toString().padLeft(2, '0')}",
+                          style: const TextStyle(fontSize: 12),
+                        ),
                     ],
                   ),
       ),
