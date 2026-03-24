@@ -60,28 +60,37 @@ bool isHourly = true;
 
                     // HEADER
                     Container(
+                      margin: const EdgeInsets.fromLTRB(16, -30, 16, 0),
                       width: double.infinity,
-                      padding: const EdgeInsets.all(20),
+                      padding: const EdgeInsets.only(top: 40, bottom: 30),
                       decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color(0xFF4facfe),
-                            Color(0xFF00f2fe),
-                          ],
-                        ),
-                      ),
+  borderRadius: BorderRadius.only(
+    bottomLeft: Radius.circular(30),
+    bottomRight: Radius.circular(30),
+  ),
+  gradient: LinearGradient(
+    colors: [
+      Color(0xFF4facfe),
+      Color(0xFF00f2fe),
+    ],
+  ),
+),
                       child: Column(
                         children: [
                           Text(
-                            provider.currentCity ?? "",
-                            style: const TextStyle(color: Colors.white),
-                          ),
+  provider.currentCity ?? "",
+  style: const TextStyle(
+    color: Colors.white,
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+  ),
+),
                           const SizedBox(height: 10),
                           Text(
                             "${provider.weather!.temp}°C",
                             style: const TextStyle(
                               color: Colors.white,
-                              fontSize: 64,
+                              fontSize: 72,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -123,7 +132,7 @@ bool isHourly = true;
                               margin: const EdgeInsets.symmetric(horizontal: 16),
                               padding: const EdgeInsets.all(16),
                               decoration: BoxDecoration(
-                                color: Colors.orange.shade100,
+                                color: Colors.orange.shade200,
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: Row(
@@ -189,6 +198,25 @@ bool isHourly = true;
                     ),
                   ],
                 ),
+      bottomNavigationBar: BottomNavigationBar(
+  currentIndex: 0,
+  selectedItemColor: Colors.blue,
+  unselectedItemColor: Colors.grey,
+  items: const [
+    BottomNavigationBarItem(
+      icon: Icon(Icons.cloud),
+      label: "Hava",
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.star)
+      label: "Favoriler"
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.radar),
+      label: "Radar",
+    ),
+  ],
+),          
     );
   }
 }
@@ -216,13 +244,17 @@ class HourItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 70,
-      margin: const EdgeInsets.only(right: 10),
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-      ),
+      width: 80,
+decoration: BoxDecoration(
+  color: Colors.white,
+  borderRadius: BorderRadius.circular(16),
+  boxShadow: [
+    BoxShadow(
+      color: Colors.black.withValues(alpha: 0.05),
+      blurRadius: 8,
+    ),
+  ],
+),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
