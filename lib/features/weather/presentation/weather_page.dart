@@ -12,6 +12,8 @@ class WeatherPage extends StatefulWidget {
 
 class _WeatherPageState extends State<WeatherPage> {
 
+bool isHourly = true;
+
   @override
   void initState() {
     super.initState();
@@ -135,21 +137,50 @@ class _WeatherPageState extends State<WeatherPage> {
                               ),
                             ),
 
+                            Padding(
+  padding: const EdgeInsets.symmetric(horizontal: 16),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+
+      _buildToggleButton("Saatlik", isHourly, () {
+        setState(() => isHourly = true);
+      }),
+
+      const SizedBox(width: 10),
+
+      _buildToggleButton("Günlük", !isHourly, () {
+        setState(() => isHourly = false);
+      }),
+
+    ],
+  ),
+),
                             const SizedBox(height: 16),
 
                             SizedBox(
-                              height: 100,
-                              child: ListView(
-                                scrollDirection: Axis.horizontal,
-                                padding: const EdgeInsets.symmetric(horizontal: 16),
-                                children: const [
-                                  HourItem(time: "12:00", temp: "21°"),
-                                  HourItem(time: "13:00", temp: "22°"),
-                                  HourItem(time: "14:00", temp: "20°"),
-                                  HourItem(time: "15:00", temp: "19°"),
-                                ],
-                              ),
-                            ),
+  height: 100,
+  child: isHourly
+      ? ListView(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          children: const [
+            HourItem(time: "12:00", temp: "21°"),
+            HourItem(time: "13:00", temp: "22°"),
+            HourItem(time: "14:00", temp: "20°"),
+            HourItem(time: "15:00", temp: "19°"),
+          ],
+        )
+      : ListView(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          children: const [
+            HourItem(time: "Pzt", temp: "22°"),
+            HourItem(time: "Sal", temp: "19°"),
+            HourItem(time: "Çar", temp: "21°"),
+          ],
+        ),
+),
 
                             const SizedBox(height: 20),
                           ],
@@ -202,4 +233,24 @@ class HourItem extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _buildToggleButton(String text, bool isActive, VoidCallback onTap) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      decoration: BoxDecoration(
+        color: isActive ? Colors.blue : Colors.grey.shade200,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: isActive ? Colors.white : Colors.black,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    ),
+  );
 }
