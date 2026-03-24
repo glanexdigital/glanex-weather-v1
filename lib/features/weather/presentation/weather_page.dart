@@ -59,49 +59,52 @@ bool isHourly = true;
                   children: [
 
                     // HEADER
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(16, -30, 16, 0),
-                      width: double.infinity,
-                      padding: const EdgeInsets.only(top: 40, bottom: 30),
-                      decoration: const BoxDecoration(
-  borderRadius: BorderRadius.only(
-    bottomLeft: Radius.circular(30),
-    bottomRight: Radius.circular(30),
-  ),
-  gradient: LinearGradient(
-    colors: [
-      Color(0xFF4facfe),
-      Color(0xFF00f2fe),
-    ],
+Transform.translate(
+  offset: const Offset(0, -30), // 🔥 yukarı kaydırır
+  child: Container(
+    margin: const EdgeInsets.symmetric(horizontal: 16), // ❗ negatif yok
+    width: double.infinity,
+    padding: const EdgeInsets.only(top: 40, bottom: 30),
+    decoration: const BoxDecoration(
+      borderRadius: BorderRadius.only(
+        bottomLeft: Radius.circular(30),
+        bottomRight: Radius.circular(30),
+      ),
+      gradient: LinearGradient(
+        colors: [
+          Color(0xFF4facfe),
+          Color(0xFF00f2fe),
+        ],
+      ),
+    ),
+    child: Column(
+      children: [
+        Text(
+          provider.currentCity ?? "",
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: 10),
+        Text(
+          "${provider.weather!.temp}°C",
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 72,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          provider.weather!.condition,
+          style: const TextStyle(color: Colors.white70),
+        ),
+      ],
+    ),
   ),
 ),
-                      child: Column(
-                        children: [
-                          Text(
-  provider.currentCity ?? "",
-  style: const TextStyle(
-    color: Colors.white,
-    fontSize: 20,
-    fontWeight: FontWeight.w600,
-  ),
-),
-                          const SizedBox(height: 10),
-                          Text(
-                            "${provider.weather!.temp}°C",
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 72,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            provider.weather!.condition,
-                            style: const TextStyle(color: Colors.white70),
-                          ),
-                        ],
-                      ),
-                    ),
-
+                    
                     Expanded(
                       child: SingleChildScrollView(
                         child: Column(
@@ -208,8 +211,8 @@ bool isHourly = true;
       label: "Hava",
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.star)
-      label: "Favoriler"
+      icon: Icon(Icons.star),
+      label: "Favoriler",
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.radar),
